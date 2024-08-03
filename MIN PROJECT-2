@@ -1,0 +1,10 @@
+Explanation:
+Normalization: Convert both names to the same case to ignore case sensitivity.
+
+Removing Common Characters: This step attempts to cancel out characters that are shared between both names, leaving only the unique characters to be counted.
+
+Count Calculation: The number of remaining characters is used to determine how many times to "rotate" through the FLAMES list.
+
+FLAMES List Rotation: The list is rotated based on the remaining character count until only one character is left, which corresponds to the relationship status.
+
+Result Mapping: The final character in the FLAMES list is mapped to the relationship status and returned as the result.
