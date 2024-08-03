@@ -1,10 +1,44 @@
-Explanation:
-Normalization: Convert both names to the same case to ignore case sensitivity.
+def flames_game(player1, player2):
+    # Step 1: Take two names
+    name1 = player1.lower().replace(" ", "")
+    name2 = player2.lower().replace(" ", "")
+    
+    # Step 2: Remove the common characters
+    for char in name1[:]:
+        if char in name2:
+            name1 = name1.replace(char, '', 1)
+            name2 = name2.replace(char, '', 1)
 
-Removing Common Characters: This step attempts to cancel out characters that are shared between both names, leaving only the unique characters to be counted.
+    # Step 3: Get the remaining characters count
+    count = len(name1) + len(name2)
+    
+    # Step 4: Character array for FLAMES
+    flames = ["F", "L", "A", "M", "E", "S"]
+    
+    # Step 5: Remove letters based on count
+    while len(flames) > 1:
+        index = (count % len(flames)) - 1
+        if index >= 0:
+            flames = flames[index + 1:] + flames[:index]
+        else:
+            flames = flames[:len(flames) - 1]
+    
+    # Step 6: The letter left is the result
+    result = flames[0]
+    
+    # Output format
+    status = {
+        "F": "Friends",
+        "L": "Lovers",
+        "A": "Affectionate",
+        "M": "Marriage",
+        "E": "Enemies",
+        "S": "Siblings"
+    }
+    
+    return f"status = {status[result]}"
 
-Count Calculation: The number of remaining characters is used to determine how many times to "rotate" through the FLAMES list.
-
-FLAMES List Rotation: The list is rotated based on the remaining character count until only one character is left, which corresponds to the relationship status.
-
-Result Mapping: The final character in the FLAMES list is mapped to the relationship status and returned as the result.
+# Example usage:
+player1 = input("Enter the name of Player 1: ")
+player2 = input("Enter the name of Player 2: ")
+print(flames_game(player1, player2))  # Output will depend on the names provided
